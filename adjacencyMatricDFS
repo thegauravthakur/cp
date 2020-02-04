@@ -1,0 +1,32 @@
+/*
+ * Created by Gaurav on 04-02-2020
+ */
+#include <bits/stdc++.h>
+
+using namespace std;
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+void dfs(vector<vector<bool>> a, vector<bool> &visited, int start, int vertex) {
+    cout << start << ' ';
+    visited[start] = true;
+    for (int i = 1; i <= vertex; i++)
+        if (a[start][i] && !visited[i]) dfs(a, visited, i, vertex);
+
+}
+
+int32_t main() {
+    IOS
+    int v, e;
+    cin >> v >> e;
+    vector<bool> visited(v, false);
+    vector<vector<bool>> graph(v + 1, vector<bool>(v + 1, false));
+    while (e--) {
+        int a, b;
+        cin >> a >> b;
+        graph[a][b] = true;
+        graph[b][a] = true;
+    }
+    dfs(graph, visited, 1, v);
+}
