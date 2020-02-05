@@ -1,0 +1,23 @@
+/*
+ * Created by Gaurav on 05-02-2020
+ */
+#include <bits/stdc++.h>
+
+using namespace std;
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+int fib(int n, vector<int>&dp) {
+    if (n == 1 or n == 0) return n;
+    else if (dp[n] != 0) return dp[n];
+    else return dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+}
+
+int32_t main() {
+    IOS
+    int n;
+    cin >> n;
+    vector<int>dp(n+1,0); // for memorisation
+    cout << fib(n, dp) << endl;
+}
