@@ -8,6 +8,29 @@ using namespace std;
 #define endl "\n"
 #define int long long
 
+vector<int> dijkstra(vector<pair<int, int>> a[], int start) {
+    vector<int> distance(N, INT_MAX);
+    distance[start] = 0;
+    set<pair<int, int>> s;
+    s.insert({distance[start], start});
+    while (not s.empty()) {
+        auto root = *s.begin();
+        s.erase(s.begin());
+        for (auto currentNode : a[root.second]) {
+            int totalDistance = currentNode.second + root.first;
+            if (totalDistance < distance[currentNode.first]) {
+                distance[currentNode.first] = totalDistance;
+                pair<int, int> newNode = {totalDistance, currentNode.first};
+                auto find = s.find(newNode);
+                if (find != s.end()) s.erase(find);
+                s.insert(newNode);
+            }
+        }
+
+    }
+    return distance;
+}
+
 int32_t main() {
     IOS
     int n, e;
